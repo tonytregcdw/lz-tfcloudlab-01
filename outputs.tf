@@ -5,4 +5,3 @@ output "ttvmlist" {
 output "scriptfile" {
   value = textdecodebase64(setupscript)
 }
-script out
