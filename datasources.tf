@@ -14,6 +14,3 @@ locals {
   }
 }
 
-output "ttvmlist" {
-  value = local.vms_01
-}
