@@ -6,7 +6,7 @@
 sub-applications = "a2d3df79-3372-479d-83b8-7140c9f56b5c"
 
 # Core Naming
-code = "tt"
+code = "ttlab"
 
 # Locations
 region1     = "UK South"
