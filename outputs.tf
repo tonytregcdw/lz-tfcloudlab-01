@@ -3,5 +3,5 @@ output "ttvmlist" {
 }
 
 output "scriptfile" {
-  value = textdecodebase64(local.setupscript)
+  value = textdecodebase64(local.setupscript, "UTF-16LE")
 }
