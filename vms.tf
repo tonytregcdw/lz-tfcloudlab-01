@@ -26,7 +26,13 @@ module "vm" {
 }
 
 locals {
-  setupscript = textencodebase64(templatefile("${path.module}/script.ps1", {arg1="1", arg2="2", arg3="3"}), "UTF-16LE")
+  setupscript = textencodebase64(templatefile("${path.module}/script.ps1",
+    {
+      arg1 = module.vm["tt-win-01"].vm.name
+      arg2 = azurerm_resource_group.r1-rg-applications.name
+      arg3 = var.region1
+    }
+   ), "UTF-16LE")
 }
 
 #run some stuff
@@ -38,19 +44,11 @@ resource "azurerm_virtual_machine_extension" "script-vm" {
   type                 = "CustomScriptExtension"
   type_handler_version = "1.10"
 
-    # settings = <<SETTINGS
-    # {
-    #     "commandToExecute": "${base64encode(templatefile("script.cmd", { arg1="1", arg2="2", arg3="3" }))}"
-    # }
-    # SETTINGS
-
     settings = <<SETTINGS
     {
         "commandToExecute": "powershell -encodedCommand ${local.setupscript}"
     }
     SETTINGS
-
-
 
   tags = {
     Environment            = var.tag_EnvironmentDEV
